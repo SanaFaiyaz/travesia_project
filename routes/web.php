@@ -12,12 +12,13 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 Route::resource('contacts', 'ContactController');
 Route::resource('bedrooms', 'BedroomController');
 Route::resource('hotels', 'HotelController');
 Route::resource('accomodation_transactions', 'AccomodationTransactionController');
 Auth::routes();
+Route::resource('places','PlaceController');
 
 Route::get('/home', 'HomeController@index')->name('home');

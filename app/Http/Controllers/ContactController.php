@@ -61,7 +61,7 @@ class ContactController extends Controller
 
             // redirect
             
-            return redirect()->route('contacts.index')->with('message', 'I am so frustrated.');
+            return redirect()->route('/welcome')->with('message', 'Successfully submitted. Please wait for resonse on your email. Thank you!.');
        
     }
 

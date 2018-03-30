@@ -66,14 +66,14 @@
                     </div>
                     <div id="main-nav" class="navbar-collapse collapse">
                         <ul id="menu-list" class="list-inline list-unstyled pull-right">
-                            <li> <a href="index.html"> Home </a> </li>
-                            <li> <a href="accomodation.html"> Accomodation </a> </li>
-                            <li> <a href="transport.html"> Transport </a> </li>
+                            <li> <a href="{{ url('home')}}"> Home </a> </li>
+                            <li> <a href="{{ url('hotels')}}"> Hotels </a> </li>
+                            <li> <a href="{{ url('accomodation_transactions/create')}}"> Accomodation </a></li>
                             <li> <a href="packages.html"> Packages </a> </li>
                             <li> <a href="budget.html"> Budget </a> </li>
                             <li> <a href="booking.html"> Booking </a> </li>
-                            <li> <a href="places.html"> Places </a> </li>
-                            <li> <a href="contact.html"> Contact Us </a> </li>
+                            <li> <a href="{{ url('places')}}"> Places </a> </li>
+                            <li><a href="{{ url('contacts/create')}}">Contact Us </li>
                         </ul>
                     </div>
                 </nav>
@@ -92,13 +92,13 @@
                 <div class="breadCrumbText">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3>Contact Us</h3>
+                            <h3>Accomodation</h3>
                         </div>
                         <div class="col-sm-6 text-right">
                             <p>
-                                <a href="index.html">Home</a>
+                                <a href="{{ url('home')}}">Home</a>
                                 <i class="fa fa-angle-right"></i>
-                                <a href="contact.html">Contact Us</a>
+                                <a href="{{ url('accomodation_transactions/create')}}">Book your Hotel</a>
                             </p>
                         </div>
                     </div>
@@ -108,52 +108,108 @@
         </div>
     </div>
 </div>
+@if ($errors->any())
+        {{ implode('', $errors->all('<div>:message</div>')) }}
+@endif
 <div style ="margin-top: 50px;margin-bottom: 50px;">
-    <h2 align="center">Confused? Give us a shout!</h2>
+    <h2 align="center">Book Your Accomodation Now</h2>
     </div>
+
 <div style ="vertical-align: center;">
-    <div style ="position:center;margin: auto;width:700px">
+    <div style ="position:center;margin: auto; width:700px;">
     
-<form class="form-horizontal" method="post" action="/contacts">
+<form class="form-horizontal" method="post" action="/accomodation_transactions">
 
 <div class="form-group">
-    <label for="name" class="col-lg-2 control-label">
-        Name
+
+    <label for="hotel_id" class="col-lg-2 control-label">
+        Hotel
+         </label>
+         <div class="col-lg-10">
+    <select class="form-control" name="hotel_id">
+         @foreach($hotels as $hotel)
+      <option value="{{$hotel->id}}">{{$hotel->name}}</option>
+    @endforeach
+  </select>
+</div>
+</div>
+
+<div class="form-group">
+
+    <label for="bedroom_id" class="col-lg-2 control-label">
+        Bedroom
+         </label>
+         <div class="col-lg-10">
+    <select class="form-control"  name="bedroom_id">
+         @foreach($bedrooms as $bedroom)
+      <option value="{{$bedroom->id}}">{{$bedroom->name}}</option>
+    @endforeach
+  </select>
+</div>
+</div>
+
+
+<div class="form-group">
+    <label for="no_of_bedrooms" class="col-lg-2 control-label">
+        Number of Bedrooms
     </label>
     <div class="col-lg-10">
-        <input type="text" class="form-control" name="name" >
+        <input type="number" class="form-control" id="no_of_bedrooms" name="no_of_bedrooms">
     </div>
 </div>
-<div class="form-group">
-    <label for="email" class="col-lg-2 control-label">
-        Email
-    </label>
-    <div class="col-lg-10">
-        <input type="email" class="form-control" id="email" name="email">
-    </div>
-</div>
+
 
 <div class="form-group">
-    <label for="phone" class="col-lg-2 control-label">
-        Phone
+    <label for="no_of_days" class="col-lg-2 control-label">
+        Number of Days (Stay Duration)
     </label>
     <div class="col-lg-10">
-        <input type="number" class="form-control" id="phone" name="phone">
+        <input type="number" class="form-control" id="no_of_days" name="no_of_days">
     </div>
 </div>
 
 
 <div class="form-group">
-    <label for="comment" class="col-lg-2 control-label">
-        Comment
+    <label for="transport" class="col-lg-2 control-label">
+        Want Transport? *Fixed fee =10,000 Rs
     </label>
     <div class="col-lg-10">
-        
-    
-    <textarea rows="4" cols="50" name="comment" >
-Enter text here...</textarea>
+    <input type="checkbox" name="transport" id="transport" value=1/>        
+    </div>
 </div>
+
+<div class="form-group">
+    <label for="payment_method" class="col-lg-2 control-label">
+        Payment Method
+    </label>
+    <div class="col-lg-10">
+        <select class="form-control" name="payment_method" >
+            <option value="PayPal">PayPal</option>
+            <option value="Visa">Visa</option>
+            <option value="MasterCard">MasterCard</option>
+        </select>
+    </div>
 </div>
+
+<div class="form-group">
+    <label for="card_number" class="col-lg-2 control-label">
+        Card Number
+    </label>
+    <div class="col-lg-10">
+        <input type="text" class="form-control" name="card_number" id="card_number" >
+    </div>
+</div>
+
+
+<div class="form-group">
+    <label for="total_amount" class="col-lg-2 control-label">
+        Total Amount
+    </label>
+    <div class="col-lg-10">
+        <input type="text" disabled="true" class="form-control" name="total_amount" id="total_amount" >
+    </div>
+</div>
+
 
 <div class="form-group">
     <div class="col-lg-10 col-lg-offset-2">
@@ -167,15 +223,7 @@ Enter text here...</textarea>
 </div>
 
 
-<div id="content">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12 text-center">
-                <img src="images/under-construction.png" alt="Under Construction">
-            </div>
-        </div>
-    </div>
-</div>
+
 
 <div id="prefooter">
     <div class="container">
@@ -202,13 +250,13 @@ Enter text here...</textarea>
                 <div id="footerText">
                     <ul>
                     
-                        <li><a href="accomodation.html">Accomodation</a> <span>| </span></li>
-                        <li><a href="transport.html">Transport</a> <span>| </span></li>
+                         <li><a href="{{ url('accomodation_transactions/create')}}">Accomodation</a> <span>| </span></li>
+                        <li><a href="{{ url('hotels')}}">Hotels</a> <span>| </span></li>
                         <li><a href="packages.html">Packages</a> <span>| </span></li>
                         <li><a href="budget.html">Budget</a> <span>| </span></li>
                         <li><a href="booking.html">Booking</a> <span>| </span></li>
-                        <li><a href="places.html">Places</a> <span>| </span></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="{{ url('places')}}">Places</a> <span>| </span></li>
+                        <li><a href="{{ url('contacts/create')}}">Contact Us</a></li>
                     
                     </ul>
                 </div>

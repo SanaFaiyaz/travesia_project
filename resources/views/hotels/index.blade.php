@@ -88,14 +88,14 @@
                     </div>
                     <div id="main-nav" class="navbar-collapse collapse">
                         <ul id="menu-list" class="list-inline list-unstyled pull-right">
-                            <li> <a href="index.html"> Home </a> </li>
-                            <li> <a href="accomodation.html"> Accomodation </a> </li>
-                            <li> <a href="transport.html"> Transport </a> </li>
+                           <li> <a href="{{ url('home')}}"> Home </a> </li>
+                            <li> <a href="{{ url('hotels')}}"> Hotels </a> </li>
+                            <li> <a href="{{ url('accomodation_transactions/create')}}"> Accomodation </a></li>
                             <li> <a href="packages.html"> Packages </a> </li>
                             <li> <a href="budget.html"> Budget </a> </li>
                             <li> <a href="booking.html"> Booking </a> </li>
-                            <li> <a href="places.html"> Places </a> </li>
-                            <li> <a href="contact.html"> Contact Us </a> </li>
+                            <li> <a href="{{ url('places')}}"> Places </a> </li>
+                            <li><a href="{{ url('contacts/create')}}">Contact Us </li>
                         </ul>
                     </div>
                 </nav>
@@ -114,13 +114,13 @@
                 <div class="breadCrumbText">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3>Contact Us</h3>
+                            <h3>Hotels</h3>
                         </div>
                         <div class="col-sm-6 text-right">
                             <p>
-                                <a href="index.html">Home</a>
+                                <a href="{{ url('home')}}">Home</a>
                                 <i class="fa fa-angle-right"></i>
-                                <a href="contact.html">Contact Us</a>
+                                <a href="{{ url('hotels')}}">Hotel</a>
                             </p>
                         </div>
                     </div>
@@ -137,7 +137,7 @@
  @foreach($hotels as $key => $value)
             <div class="hotel-border">
             <a style="display:block; text-decoration:none" class="hotel-hover" href="{{ url('hotels', $value->id) }}">
-            <img class="image-size" src="data:image/jpeg;base64,{{ base64_encode($value->image) }}">
+           <img class="image-size" src="data:image/jpeg;base64,{{ base64_encode($value->image) }}">
             <h3 style="font-size: 70px;">{{ $value->name }}</h3>
             <p style="font-size: 25px;">{{ $value->location }}</p>
             </a>
@@ -170,13 +170,13 @@
                 <div id="footerText">
                     <ul>
                     
-                        <li><a href="accomodation.html">Accomodation</a> <span>| </span></li>
-                        <li><a href="transport.html">Transport</a> <span>| </span></li>
+                     <li><a href="{{ url('accomodation_transactions/create')}}">Accomodation</a> <span>| </span></li>
+                        <li><a href="{{ url('hotels')}}">Hotels</a> <span>| </span></li>
                         <li><a href="packages.html">Packages</a> <span>| </span></li>
                         <li><a href="budget.html">Budget</a> <span>| </span></li>
                         <li><a href="booking.html">Booking</a> <span>| </span></li>
-                        <li><a href="places.html">Places</a> <span>| </span></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="{{ url('places')}}">Places</a> <span>| </span></li>
+                        <li><a href="{{ url('contacts/create')}}">Contact Us</a></li>
                     
                     </ul>
                 </div>
