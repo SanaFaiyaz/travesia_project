@@ -15,3 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::resource('contacts', 'ContactController');
+Route::resource('bedrooms', 'BedroomController');
+Route::resource('hotels', 'HotelController');
+Route::resource('accomodation_transactions', 'AccomodationTransactionController');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
